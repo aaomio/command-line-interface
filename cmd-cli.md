@@ -180,7 +180,7 @@ A clean, structured reference of common Windows CMD commands with short explanat
 `shutdown /s /t 0` — shutdown  
 `shutdown /r /t 0` — reboot  
 `shutdown /l` — log off  
-`shutdown /h` — hibernate
+`shutdown /h` — hibernate  
 `logoff` — sign out
 
 ---
