@@ -42,14 +42,3 @@ A focused reference for Wi‑Fi, network interfaces, IP configuration, DNS, and 
 `netsh winsock reset` — reset Winsock catalog  
 `netsh int ip reset` — reset TCP/IP stack
 
----
-
-## Additional Useful NETSH Commands
-
-`netsh advfirewall show allprofiles` — show firewall profiles  
-`netsh advfirewall set allprofiles state off` — disable firewall  
-`netsh advfirewall set allprofiles state on` — enable firewall  
-`netsh interface ipv4 show config` — show IPv4 config  
-`netsh interface ipv4 add dnsserver name="Wi-Fi" address=8.8.8.8 index=1` — set DNS server  
-`netsh interface ipv4 delete dnsserver name="Wi-Fi" address=all` — clear DNS servers
-
