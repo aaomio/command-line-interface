@@ -8,8 +8,8 @@ This repository is designed as a quick reference guide. Each page provides commo
 ## Contents
 
 - [Cisco IOS Console](cisco-console-cli.md)
-- [Windows CMD](cmd-cli.md)
 - [Linux Terminal](linux-terminal.md)
 - [Network Commands](net-cmd-cli.md)
 - [PowerShell](powershell-cli.md)
-
+- [Run](win+R.md)
+- [Windows CMD](cmd-cli.md)
