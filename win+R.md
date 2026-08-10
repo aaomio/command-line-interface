@@ -21,10 +21,6 @@
 | `devmgmt.msc`         | Device Manager                                   |
 | `diskmgmt.msc`        | Disk Management                                  |
 | `dsa.msc`             | Active Directory Users and Computers             |
-| `dssite.msc`          | Active Directory Sites and Services              |
-| `eventvwr.msc`        | Event Viewer                                     |
-| `dhcpmgmt.msc`        | DHCP Manager                                     |
-| `dnsmgmt.msc`         | DNS Manager                                      |
 | `gpmc.msc`            | Group Policy Management                          |
 | `gpedit.msc`          | Local Group Policy Editor                        |
 | `lusrmgr.msc`         | Local Users and Groups                           |
