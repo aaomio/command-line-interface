@@ -1,9 +1,9 @@
-# Cisco IOS Switch, Router & Multilayer Switch Reference
+# Cisco IOS CLI
 
-A structured reference of common Cisco IOS commands for switches, routers, and Layer 3 switches.
+A structured reference of common Cisco IOS commands for switches, routers, and APs.
 
 ---
-# Cisco IOS Command Reference (Switch, Router, Multilayer) — Polished
+# Cisco IOS Command Reference 
 
 ```cmd
 enable                               # Enter privileged EXEC mode (all devices)
@@ -21,12 +21,13 @@ exit                                 # Exit current mode
 
 do show running-config               # View active configuration
 do show startup-config               # View saved configuration
-write                                # Save running-config to startup-config
-write memory                         # Same as write
-copy running-config startup-config   # Manual save
-show int status                      # Interface status summary
-show interfaces f0/1                 # Detailed interface info
-do show int desc                     # Show interface descriptions
+
+do write                                # Save running-config to startup-config
+do write memory                         # Same as write
+do copy running-config startup-config   # Manual save
+
+do show int status                      # Interface status summary
+do show interfaces f0/1                 # Detailed interface info
 
 # SWITCH — MAC Address Table
 do show mac address-table                      # View MAC table
@@ -78,3 +79,17 @@ ip route 0.0.0.0 0.0.0.0 192.168.1.194   # Default route (MLS)
 
 do show ip int br                        # Layer 3 interface summary
 do show int status                       # Interface status
+
+# Bootloader
+: flash_init                                      # Initialise flash
+: dir usb:                                        # View files on USB
+: dir flash:                                      # View files in flash
+: tar -xtract usb:<image>.tar flash:              # Extract TAR image into flash
+: copy usb:<file> flash:                          # Copy file from USB to flash
+: dir flash:                                      # Verify extracted/copied files
+: set BOOT flash:/<directory>/<IOS-image>        # Set boot variable to actual IOS image
+: set                                              # Verify boot variable
+: boot                                             # Boot IOS image
+
+```
+
