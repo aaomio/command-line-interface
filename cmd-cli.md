@@ -4,6 +4,18 @@ A clean, structured reference of common Windows CMD commands with short explanat
 
 ---
 
+## User & Identity
+
+`whoami` # current user  
+`whoami /all` # full security token details  
+`hostname` # computer name  
+`net user` # list users  
+`net user Neo` # user details  
+`net accounts` # password policy  
+`whoami /groups` # security groups
+
+---
+
 ## System Information
 
 `systeminfo` # OS + hardware details  
@@ -15,27 +27,19 @@ A clean, structured reference of common Windows CMD commands with short explanat
 
 ---
 
-## User & Identity
-
-`whoami` # current user  
-`whoami /all` # full security token details  
-`hostname` # computer name  
-`echo %username%` # username  
-`net user` # list users  
-`net user Neo` # user details  
-`net accounts` # password policy  
-`whoami /groups` # security groups
-
----
-
 ## Group Management
 
 `net localgroup` # list groups  
-`net localgroup administrators TestUser123 /add` # add user to admins  
+`net localgroup administrators User1 /add` # add user to admins  
 `net user TestUser123 P@ssw0rd123 /add` # create user  
 `net user TestUser123 /delete` # delete user
 
 ---
+
+## Network Drive
+`net use` # display all mapped drives
+`net use X: \\Domain\Folder` # map network drive
+`net use X: /delete` #unmap network drive
 
 ## Network & Connectivity
 
@@ -131,6 +135,7 @@ A clean, structured reference of common Windows CMD commands with short explanat
 ### Processes
 `tasklist` # list processes  
 `tasklist /svc` # processes + services  
+`tasklist | findstr VPN` # find task containing VPN
 `taskkill /im notepad.exe /f` # kill by name  
 `taskkill /pid 1234 /f` # kill by PID  
 
@@ -140,8 +145,6 @@ A clean, structured reference of common Windows CMD commands with short explanat
 
 `attrib +h +s +r Neo` # hide, system, read‑only  
 `attrib -h -s -r /s /d *.*` # remove attributes  
-`attrib +a file.txt` # archive flag  
-`attrib -a file.txt` # remove archive flag
 
 ---
 
@@ -151,23 +154,6 @@ A clean, structured reference of common Windows CMD commands with short explanat
 `shutdown /s /t 0` # shutdown  
 `shutdown /r /t 0` # reboot  
 `logoff` # sign out
-
----
-
-## System Utilities
-
-`control` # Control Panel  
-`compmgmt.msc` # Computer Management  
-`services.msc` # Services  
-`eventvwr` # Event Viewer  
-`taskmgr` # Task Manager  
-`regedit` # Registry Editor  
-`msinfo32` # System Info  
-`dxdiag` # DirectX diagnostic  
-`cleanmgr` # Disk Cleanup  
-`sysdm.cpl` # System Properties  
-`ncpa.cpl` # Network Connections  
-`appwiz.cpl` # Programs & Features
 
 ---
 
