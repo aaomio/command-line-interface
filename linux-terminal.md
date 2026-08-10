@@ -2,188 +2,176 @@
 
 A structured reference of common Linux commands with sudo equivalents.
 
----
+## Network Configuration
 
-## System & Identity
+```bash
+sudo hostname                                      # Show hostname
+sudo ifconfig                                      # Show all network interfaces
+sudo ifconfig enp0s8                               # Show enp0s8 configuration
+sudo ifconfig enp0s8 192.168.1.1 netmask 255.255.255.0 broadcast 192.168.1.255
+                                                     # Assign IP, subnet mask and broadcast address
+sudo ifconfig enp0s8 up                            # Enable interface
+```
 
-`whoami` #show current user  
-`whoami -a` #show full identity info  
-`hostname` #show system hostname  
-`uname -a` #kernel + system info  
-`cat /etc/os-release` #Linux distribution info  
-`sudo hostnamectl set-hostname neo-linux` #set hostname
+### Default Route
 
----
+```bash
+sudo route add default gw <GATEWAY>                # Add default gateway
+```
 
-## Navigation & Location
+Example:
 
-`pwd` #show current directory  
-`cd /path` #change directory  
-`ls` #list directory contents  
-`ls -la` #list including hidden/system  
-`tree` #show folder structure  
-`sudo tree /root` #tree with elevated access
+```bash
+sudo route add default gw 192.168.1.254
+```
 
----
-
-## File & Directory Operations
-
-### Basic Commands
-`cp file.txt /backup/` #copy file  
-`mv file.txt /backup/` #move file  
-`rm file.txt` #delete file  
-`rm -rf folder/` #delete folder recursively  
-`mkdir folder` #create folder  
-`rmdir folder` #remove empty folder  
-`touch file.txt` #create empty file
-
-### Sudo Versions
-`sudo cp file.txt /root/` #copy with sudo  
-`sudo mv file.txt /root/` #move with sudo  
-`sudo rm -rf /root/folder` #delete with sudo  
-`sudo mkdir /root/folder` #create folder with sudo
+> `enp0s8` is the interface name. Check the exact name with `ifconfig` or `ip addr`.
 
 ---
 
-## Viewing & Searching
+# Snort
 
-`cat file.txt` #view file  
-`less file.txt` #paginated view  
-`head file.txt` #first lines  
-`tail file.txt` #last lines  
-`tail -f /var/log/syslog` #live log view  
-`grep "error" file.txt` #search text  
-`grep -Ri "error" /var/log/` #recursive search
+## Installation
 
----
+```bash
+sudo apt update && sudo apt upgrade -y             # Update package lists and upgrade packages
+sudo apt install snort -y                          # Install Snort
+```
 
-## Permissions & Ownership
+## Verify Snort
 
-`chmod 755 file.sh` #set permissions  
-`chmod +x script.sh` #make executable  
-`chown neo file.txt` #change owner  
-`chown neo:neo file.txt` #change owner + group  
-`sudo chown root:root file.txt` #change ownership with sudo
+```bash
+snort -V                                           # Show Snort version
+```
 
----
+## Packet Capture
 
-## User & Group Management
+```bash
+sudo snort -i enp0s8 -v                            # Capture packets verbosely on interface enp0s8
+```
 
-`id` #show user identity  
-`groups` #show group membership  
-`sudo adduser neo` #create user  
-`sudo deluser neo` #delete user  
-`sudo passwd neo` #change password  
-`sudo usermod -aG sudo neo` #add user to sudo group  
-`sudo groupadd admins` #create group  
-`sudo groupdel admins` #delete group
+## Local Rules
 
----
+Edit the local rule file:
 
-## System Management
+```bash
+sudo nano /etc/snort/rules/local.rules
+```
 
-`top` #live process viewer  
-`htop` #enhanced viewer  
-`ps aux` #list processes  
-`kill 1234` #kill process  
-`kill -9 1234` #force kill  
-`systemctl status ssh` #service status  
-`sudo systemctl restart ssh` #restart service  
-`sudo systemctl enable ssh` #enable service  
-`sudo systemctl disable ssh` #disable service
+Example TCP rule:
 
----
+```text
+alert tcp any any -> 192.168.1.0/24 any (msg:"TCP Packet Detected"; sid:1000001; rev:1;)
+```
 
-## Networking
+```text
+alert             # Generate an alert
+tcp               # Match TCP traffic
+any any           # Any source IP and source port
+->                # Traffic direction
+192.168.1.0/24    # Destination network
+any               # Any destination port
+msg               # Alert message
+sid               # Snort rule ID
+rev               # Rule revision
+```
 
-`ip a` #show IP addresses  
-`ip r` #show routes  
-`ip link` #show interfaces  
-`sudo ip link set eth0 up` #enable interface  
-`sudo ip link set eth0 down` #disable interface
+## Run Snort with Configuration
 
-### Wi‑Fi (Linux equivalents)
-`nmcli dev wifi list` #list Wi‑Fi networks  
-`nmcli con show` #list saved connections  
-`sudo nmcli con delete id "BT-JFAHR7"` #delete Wi‑Fi profile  
-`sudo nmcli con add type wifi ifname wlan0 ssid "BT-JFAHR7"` #add Wi‑Fi profile  
-`sudo nmcli con up id "BT-JFAHR7"` #connect to Wi‑Fi  
-`sudo nmcli dev wifi connect "BT-JFAHR7"` #connect directly
+```bash
+sudo snort -A console -i enp0s8 -c /etc/snort/snort.conf
+                                                     # Run Snort and display alerts in console
+```
 
-### DNS & IP
-`cat /etc/resolv.conf` #show DNS  
-`sudo nano /etc/resolv.conf` #edit DNS  
-`sudo dhclient -r` #release DHCP  
-`sudo dhclient` #renew DHCP  
-`ping 8.8.8.8` #test connection  
-`traceroute google.com` #trace route  
-`dig microsoft.com` #DNS lookup  
-`netstat -tulnp` #ports + PIDs
+Test the configuration before running:
+
+```bash
+sudo snort -T -c /etc/snort/snort.conf             # Test Snort configuration and rules
+```
 
 ---
 
-## Package Management
+# hping3
 
-### Debian / Ubuntu (APT)
-`sudo apt update` #update package list  
-`sudo apt upgrade` #upgrade packages  
-`sudo apt install htop` #install package  
-`sudo apt remove htop` #remove package  
-`sudo apt autoremove` #cleanup
+## Installation
 
-### RedHat / CentOS (YUM / DNF)
-`sudo dnf install htop` #install  
-`sudo dnf remove htop` #remove  
-`sudo dnf update` #update packages
+```bash
+sudo apt install hping3 -y                         # Install hping3
+```
 
-### Snap
-`snap list` #list snaps  
-`sudo snap install code` #install snap  
-`sudo snap remove code` #remove snap
+## Create Payload
 
----
+```bash
+echo -e "\r\n" > payload1                          # Create a file containing CR/LF
+```
 
-## Disk & Storage
+> `echo -e` interprets escape sequences. `\r` = carriage return and `\n` = line feed.
 
-`df -h` #disk usage  
-`du -sh folder/` #folder size  
-`lsblk` #block devices  
-`mount` #mounted filesystems  
-`sudo mount /dev/sdb1 /mnt` #mount drive  
-`sudo umount /mnt` #unmount drive  
-`sudo fdisk -l` #list partitions  
-`sudo mkfs.ext4 /dev/sdb1` #format drive
+## Example hping3
 
----
+```bash
+sudo hping3 -a <SOURCE-IP> -p <DEST-PORT> -s <SOURCE-PORT> \
+-d <DATA-SIZE> -c 1 -E payload1 <DESTINATION-IP>
+```
 
-## Archives & Compression
+Example:
 
-`tar -cvf archive.tar folder/` #create tar  
-`tar -xvf archive.tar` #extract tar  
-`tar -czvf archive.tar.gz folder/` #create gzip  
-`tar -xzvf archive.tar.gz` #extract gzip  
-`unzip file.zip` #extract zip  
-`zip -r archive.zip folder/` #create zip
+```bash
+sudo hping3 -a 192.168.1.65 -p 80 -s 12345 \
+-d 2 -c 1 -E payload1 192.168.1.1
+```
+
+```text
+-a              # Spoof source IP
+-p              # Destination port
+-s              # Source port
+-d              # Data size
+-c 1            # Send one packet
+-E payload1     # Read packet data from payload1
+```
 
 ---
 
-## System Updates & Upgrades
+# UFW
 
-`sudo apt update && sudo apt upgrade -y` #full update  
-`sudo apt dist-upgrade` #major upgrade  
-`sudo apt full-upgrade` #kernel + system upgrade  
-`sudo reboot` #restart  
-`sudo shutdown now` #shutdown
+## Status
 
----
+```bash
+sudo ufw status                                   # Show UFW status
+sudo ufw status verbose                           # Show detailed status
+sudo ufw status numbered                          # Show numbered rules
+```
 
-## Scripting Essentials
+## Disable / Enable
 
-`echo "Hello"` #print text  
-`read -p "Enter value: " var` #prompt user  
-`var="Neo"` #set variable  
-`if [ -f file.txt ]; then echo "Exists"; fi` #condition  
-`for i in {1..5}; do echo $i; done` #loop  
-`chmod +x script.sh` #make script executable  
-`./script.sh` #run script
+```bash
+sudo ufw disable                                  # Disable firewall
+sudo ufw enable                                   # Enable firewall
+```
+
+## Allow SSH from a Network
+
+```bash
+sudo ufw allow from 192.168.1.0/24 to any port 22 proto tcp
+                                                     # Allow SSH from network
+```
+
+## Block Telnet
+
+```bash
+sudo ufw deny from any to any port 23 proto tcp   # Block TCP Telnet
+```
+
+## Block TCP Port from a Subnet
+
+```bash
+sudo ufw deny from 192.168.1.64/26 to any port 80 proto tcp
+                                                     # Block TCP port 80 from subnet
+```
+
+## Monitor UFW Logs
+
+```bash
+sudo tail -f /var/log/ufw.log                     # Follow UFW log in real time
+```
 
