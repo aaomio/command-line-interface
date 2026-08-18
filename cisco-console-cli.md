@@ -66,7 +66,7 @@ Switch(config)# interface vlan 20
                                       # Create/select SVI for VLAN 20
 Switch(config-if)# ip address 192.168.20.1 255.255.255.0
                                       # Assign Layer 3 address to SVI
-Switch(config-if)# no shutdown         # Enable SVI
+Switch(config-if)# no shutdown        # Enable SVI
 
 ## Port Security
 
