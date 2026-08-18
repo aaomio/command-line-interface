@@ -5,91 +5,80 @@ A structured reference of common Cisco IOS commands for switches, routers, and A
 ---
 # Cisco IOS Command Reference 
 
-```cmd
-enable                               # Enter privileged EXEC mode (all devices)
-configure terminal                   # Enter global configuration mode
-hostname R1                          # Set device hostname (switch/router/multilayer)
-enable password XXX                  # Legacy enable password (avoid in production)
-service password-encryption          # Encrypt plain-text passwords
-enable secret XXX                    # Secure encrypted enable password
+# SWITCH
 
-int g0/1                             # Enter interface GigabitEthernet0/1
-int range g0/1-5, 7-10               # Configure multiple interfaces at once
-shutdown                             # Disable interface
-no shutdown                          # Enable interface
-exit                                 # Exit current mode
+## Privileged EXEC / Global Configuration
 
-do show running-config               # View active configuration
-do show startup-config               # View saved configuration
+Switch> enable                        # Enter privileged EXEC mode
+Switch# configure terminal            # Enter global configuration mode
+switch(config)# hostname SW1          # Set device hostname
 
-do write                                # Save running-config to startup-config
-do write memory                         # Same as write
-do copy running-config startup-config   # Manual save
+switch(config)# enable password XXX   # Legacy enable password
+switch(config)# service password-encryption
+                                      # Encrypt plain-text passwords
+switch(config)# enable secret XXX     # Encrypted enable password
 
-do show int status                      # Interface status summary
-do show interfaces f0/1                 # Detailed interface info
+## Interface Selection
 
-# SWITCH — MAC Address Table
-do show mac address-table                      # View MAC table
-clear mac address-table dynamic                # Clear learned MACs
-clear mac address-table dynamic interface g0/1 # Clear MACs on specific port
+switch(config)# int g0/1              # Enter interface GigabitEthernet0/1
+switch(config)# int range g0/0-3      # Select multiple interfaces
+switch(config-if)# exit               # Exit interface configuration mode
 
-# SWITCH — Access Ports (VLAN)
-int range g0/0-3                # Select access ports
-switchport mode access          # Set ports to access mode
-switchport access vlan 10       # Assign VLAN 10
-do show vlan br                 # Display VLAN brief
+## VLAN — Access Port
 
-# SWITCH — Trunk Ports
-int g0/0                         # Select trunk port
-switchport trunk encap dot1q     # Set trunk encapsulation to 802.1Q
-switchport mode trunk            # Enable trunking
-switchport trunk allowed vlan 10 # Allow VLAN 10 on trunk
-switchport trunk native vlan 1001 # Set native VLAN
-do show int trunk                # View trunk status
-do show int g0/0 sw              # Show switchport details
+switch(config)# int range g0/0-3      # Select multiple interfaces
+switch(config-if-range)# switchport mode access
+                                      # Force interfaces into access mode
+switch(config-if-range)# switchport access vlan 10
+                                      # Assign interfaces to VLAN 10
 
-# ROUTER — Interface & Routing
-enable                                   # Enter privileged mode
-conf t                                   # Enter global config
-int g0/0                                 # Select interface
-ip add 10.x.x.x 255.0.0.0                # Assign IP address
-description ##abc##                      # Add interface description
-ip route 0.0.0.0 0.0.0.0 g0/1 192.x.x.x  # Default route (gateway of last resort)
-no shutdown                              # Enable interface
-ip add 192.168.1.62 255.255.255.192      # Assign IP (secondary or replacement)
+## Trunk Port
 
-do show ip interface br                  # IP/interface summary
-do show interface g0/0                   # Detailed interface info
-do show ip route                         # View routing table
-do show run | include ip address         # Filter running-config for IPs
+switch(config)# int g0/0              # Select trunk interface
+switch(config-if)# switchport trunk encapsulation dot1q
+                                      # Set 802.1Q encapsulation
+switch(config-if)# switchport mode trunk
+                                      # Force interface into trunk mode
+switch(config-if)# switchport trunk allowed vlan 10
+                                      # Allow VLAN 10 across trunk
+switch(config-if)# switchport trunk native vlan 1001
+                                      # Set VLAN 1001 as native VLAN
 
-# MULTILAYER SWITCH — L3 Routing & SVIs
-default interface g0/0                   # Reset interface to default
-ip routing                               # Enable Layer 3 routing (MLS only)
-int g0/1                                 # Select routed port
-no switchport                            # Convert to Layer 3 interface
+## Layer 3 / Routed Switch Port
 
-int g0/0.20                              # Create subinterface for VLAN 20
-encapsulation dot1q 20                   # Tag VLAN 20
-encapsulation dot1q 20 native            # Set VLAN 20 as native (optional)
-ip add 192.x.x.x 255.255.255.0           # Assign IP to SVI/subinterface
+switch(config)# int g0/0              # Select interface
+switch(config-if)# no switchport      # Convert switchport into Layer 3 interface
 
-ip route 0.0.0.0 0.0.0.0 192.168.1.194   # Default route (MLS)
+## Router-on-a-Stick / Subinterfaces
 
-do show ip int br                        # Layer 3 interface summary
-do show int status                       # Interface status
+switch(config)# int g0/0.20           # Create/select subinterface
+switch(config-subif)# encapsulation dot1q 20
+                                      # Associate subinterface with VLAN 20
+switch(config-subif)# ip address 192.168.20.1 255.255.255.0
+                                      # Assign Layer 3 address
 
-# Bootloader
-: flash_init                                      # Initialise flash
-: dir usb:                                        # View files on USB
-: dir flash:                                      # View files in flash
-: tar -xtract usb:<image>.tar flash:              # Extract TAR image into flash
-: copy usb:<file> flash:                          # Copy file from USB to flash
-: dir flash:                                      # Verify extracted/copied files
-: set BOOT flash:/<directory>/<IOS-image>        # Set boot variable to actual IOS image
-: set                                              # Verify boot variable
-: boot                                             # Boot IOS image
+switch(config-subif)# encapsulation dot1q 20 native
+                                      # Make VLAN 20 the native VLAN
 
-```
+## SVI — Switched Virtual Interface
+
+Switch(config)# interface vlan 20
+                                      # Create/select SVI for VLAN 20
+Switch(config-if)# ip address 192.168.20.1 255.255.255.0
+                                      # Assign Layer 3 address to SVI
+Switch(config-if)# no shutdown         # Enable SVI
+
+## Port Security
+
+switch(config)# int g0/1              # Select access port
+switch(config-if)# switchport mode access
+                                      # Port must be in access mode
+switch(config-if)# switchport port-security
+                                      # Enable port security
+
+switch(config-if)# switchport port-security mac-address FFFF.FFFF.FFFF
+                                      # Manually configure secure MAC address
+
+switch(config-if)# switchport port-security mac-address sticky
+                                      # Dynamically learn and secure MAC address
 
