@@ -137,3 +137,18 @@ R1(config-if)# tunnel destination ISP-IP           # Specify remote tunnel endpo
 R1(config-if)# ip address 10.10.10.1 255.255.255.252
                                                    # Assign tunnel IP address
 R1(config-if)# no shutdown                         # Enable GRE tunnel
+
+# Bootloader / ROMMON
+
+: flash_init                                # Initialise flash filesystem
+: dir usb:                                  # View files on USB
+: dir flash:                                # View files in flash
+
+: tar -xtract usb:<image>.tar flash:        # Extract TAR IOS image into flash
+: copy usb:<file> flash:                    # Copy file from USB to flash
+
+: dir flash:                                # Verify files in flash
+
+: set BOOT flash:/<directory>/<IOS-image>   # Set BOOT variable to IOS image
+: set                                       # Display environment variables
+: boot                                      # Boot IOS image
