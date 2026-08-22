@@ -126,6 +126,11 @@ A structured reference of common Cisco IOS commands for switches, routers, WLCs,
 
 # WLC
 
+## WLC Settings
+`reset system`                                                     # Reset system 
+`config time manual 07/07/17 02:02:02`                             # Configure Time 
+`conf prompt WLC1`                                                 # Configure host name 
+
 ## AP Settings
 
 `WLC1> config ap name AP1 APe02f.6d5b.dade`                       # Configure AP name
