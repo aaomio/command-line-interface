@@ -135,6 +135,7 @@ A structured reference of common Cisco IOS commands for switches, routers, WLCs,
 
 `WLC1> config ap name AP1 APe02f.6d5b.dade`                       # Configure AP name
 `WLC1> config ap location "Office" AP1`                           # Configure AP location
+`WLC1> config ap country "GB" AP1`                                # Configure country code
 `WLC1> config ap image predownload primary APe02f.6d5b.dade`      # Predownload AP image
 
 ## Network Settings
@@ -164,3 +165,6 @@ A structured reference of common Cisco IOS commands for switches, routers, WLCs,
 
 `AP1(config)# dot11 ssid LAB-Auto-AP1-5G`                         # Configure SSID
 `AP1(config-if-ssid)# guest-mode`                                 # Broadcast SSID
+
+## Find WLC
+`capwap ap controller ip address 192.168.30.20`                   # Set WLC IP
