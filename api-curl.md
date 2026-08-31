@@ -1,6 +1,6 @@
 # REST API — cURL
 
-This guide provides a quick reference for interacting with REST APIs using cURL. It covers the five commonly used HTTP methods — POST, GET, PUT, PATCH, and DELETE — along with common cURL options for headers, request bodies, and cookie-based session authentication.
+This guide provides a quick reference for interacting with REST APIs using cURL. It covers the five commonly used HTTP methods - POST, GET, PUT, PATCH, and DELETE, along with common cURL options for headers, request bodies, and cookie-based session authentication.
 
 ## POST — Create
 
