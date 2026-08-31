@@ -13,3 +13,4 @@ This repository is designed as a quick reference guide. Each page provides commo
 - [PowerShell](powershell-cli.md)
 - [Run](win+R.md)
 - [Windows CMD](cmd-cli.md)
+- [API cURL](api-curl.md)
