@@ -2,7 +2,7 @@
 
 This guide provides a quick reference for interacting with REST APIs using cURL. It covers the five commonly used HTTP methods - POST, GET, PUT, PATCH, and DELETE, along with common cURL options for headers, request bodies, and cookie-based session authentication.
 
-## POST — Create
+## POST - Create
 
 ```bash
 curl -s -k -X POST "https://<API-URL>/resource" \
@@ -10,13 +10,13 @@ curl -s -k -X POST "https://<API-URL>/resource" \
   -d '{"name":"example"}'
 ```
 
-## GET — Retrieve
+## GET - Retrieve
 
 ```bash
 curl -s -k -X GET "https://<API-URL>/resource"
 ```
 
-## PUT — Update/Replace
+## PUT - Update/Replace
 
 ```bash
 curl -s -k -X PUT "https://<API-URL>/resource" \
@@ -24,7 +24,7 @@ curl -s -k -X PUT "https://<API-URL>/resource" \
   -d '{"name":"example","status":"active"}'
 ```
 
-## PATCH — Partially Update
+## PATCH - Partially Update
 
 ```bash
 curl -s -k -X PATCH "https://<API-URL>/resource" \
@@ -40,7 +40,7 @@ curl -s -k -X DELETE "https://<API-URL>/resource"
 
 ## Cookies
 
-### `-c` — Save Cookies
+### `-c` - Save Cookies
 
 Save cookies received from the server to a file:
 
@@ -51,7 +51,7 @@ curl -s -k -X POST "https://<API-URL>/login" \
   -c cookie.txt
 ```
 
-### `-b` — Send Cookies
+### `-b` - Send Cookies
 
 Send previously saved cookies with a request:
 
