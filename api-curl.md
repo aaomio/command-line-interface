@@ -81,13 +81,3 @@ curl -s -k -X POST "https://<API-URL>/resource" \
 | `-d`   | Send request body/data            |
 | `-c`   | Save cookies to a file            |
 | `-b`   | Send cookies from a file          |
-
-## HTTP Methods
-
-| Method   | Purpose                                   |
-| -------- | ----------------------------------------- |
-| `POST`   | Create a resource or perform an operation |
-| `GET`    | Retrieve a resource                       |
-| `PUT`    | Update or replace a resource              |
-| `PATCH`  | Partially update a resource               |
-| `DELETE` | Delete a resource                         |
