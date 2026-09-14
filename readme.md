@@ -7,10 +7,12 @@ This repository is designed as a quick reference guide. Each page provides commo
 
 ## Contents
 
+- [API cURL](api-curl.md)
 - [Cisco IOS Console](cisco-console-cli.md)
+- [Directories](directory.md)
 - [Linux Terminal](linux-terminal.md)
 - [Network Commands](net-cmd-cli.md)
 - [PowerShell](powershell-cli.md)
 - [Run](win+R.md)
 - [Windows CMD](cmd-cli.md)
-- [API cURL](api-curl.md)
+
