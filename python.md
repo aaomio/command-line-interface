@@ -63,6 +63,12 @@ deactivate
 python3 -m pip install <package>
 ```
 
+### Show Package Version
+
+```bash
+python3 -m pip show <package>
+```
+
 ### Uninstall Package
 
 ```bash
