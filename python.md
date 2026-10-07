@@ -226,23 +226,3 @@ len(variable)
 .get()
 .update()
 ```
-
-## Useful Formatting
-
-### f-string
-
-```python
-f"My name is {name} and my age is {age}"
-```
-
-### String Concatenation
-
-```python
-"My name is " + name + " and my age is " + str(age)
-```
-
-### New Line
-
-```python
-"\n"
-```
