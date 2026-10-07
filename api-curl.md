@@ -1,6 +1,6 @@
 # REST API - cURL
 
-This guide provides a quick reference for interacting with REST APIs using cURL. It covers the five commonly used HTTP methods - POST, GET, PUT, PATCH, and DELETE, along with common cURL options for headers, request bodies, and cookie-based session authentication.
+Quick reference for interacting with REST APIs using cURL.
 
 ## POST - Create
 
@@ -32,10 +32,21 @@ curl -s -k -X PATCH "https://<API-URL>/resource" \
   -d '{"status":"inactive"}'
 ```
 
-## DELETE — Delete
+## DELETE - Delete
 
 ```bash
 curl -s -k -X DELETE "https://<API-URL>/resource"
+```
+
+## Authentication
+
+### `-u` - Basic Authentication
+
+Send a username and password:
+
+```bash
+curl -s -k -u "username:password" \
+  -X GET "https://<API-URL>/resource"
 ```
 
 ## Cookies
@@ -76,6 +87,7 @@ curl -s -k -X POST "https://<API-URL>/resource" \
 | ------ | --------------------------------- |
 | `-s`   | Silent                            |
 | `-k`   | Skip TLS certificate verification |
+| `-u`   | Provide username and password     |
 | `-X`   | Specify HTTP method               |
 | `-H`   | Add HTTP header                   |
 | `-d`   | Send request body/data            |
