@@ -1,4 +1,6 @@
-# Python - Quick Reference
+# Python 
+
+Quick reference for installing Python, managing virtual environments and packages, and running basic Python commands.
 
 ## Install Python
 
