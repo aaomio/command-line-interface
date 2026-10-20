@@ -12,8 +12,10 @@ This repository is designed as a quick reference guide. Each page provides commo
 - [Directories](directory.md)
 - [Linux Terminal](linux-terminal.md)
 - [Network Commands](net-cmd-cli.md)
+- [PING](ping.md)
 - [PowerShell](powershell-cli.md)
 - [Python](python.md)
 - [Run](win+R.md)
+- [TRACE](trace.md)
 - [Windows CMD](cmd-cli.md)
 
